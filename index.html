@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Anniversary 🎉</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <video autoplay muted loop id="bgVideo">
+    <source src="https://www.videvo.net/videvo_files/converted/2017_01/preview/170104_Fireworks_07_1080p.mp465611.webm" type="video/webm">
+    Your browser does not support HTML5 video.
+  </video>
+  <div class="overlay"></div>
+
+  <canvas id="fireworks"></canvas>
+
+  <div class="content">
+    <!-- Input area -->
+    <div class="input-container">
+      <input id="nameInput" placeholder="🎉 Couple's Names (e.g., Amit & Neha)" />
+      <input id="msgInput" placeholder="✍️ Personal Message (e.g., Wishing you...)" />
+      <button class="btn update-btn" onclick="updateContent()">
+        <i class="fas fa-sync-alt neon-icon" style="color: var(--neon-purple);"></i> Update Message
+      </button>
+    </div>
+
+    <!-- Display area -->
+    <h1 id="nameDisplay">Amit & Neha's Anniversary! <i class="fas fa-heart" style="color: var(--neon-pink);"></i></h1>
+    <p id="msgDisplay">Wishing you a lifetime of love and laughter together! <i class="fas fa-glass-cheers" style="color: var(--neon-yellow);"></i></p>
+
+    <!-- New text-to-image elements -->
+    <div class="image-generation-container">
+        <input id="imagePrompt" placeholder="🖼️ Describe an image to generate... (e.g., a couple on a beach)" />
+        <button class="btn generate-btn" onclick="generateImage()">
+            <i class="fas fa-magic neon-icon" style="color: var(--neon-blue);"></i> Generate Image
+        </button>
+        <div class="image-display-container">
+            <img id="generatedImage" src="" alt="Generated Image" style="display: none; max-width: 100%; border-radius: 10px; margin-top: 20px; box-shadow: 0 0 20px var(--neon-pink);">
+            <p id="loadingIndicator" style="display: none;">Generating your masterpiece... ✨</p>
+        </div>
+    </div>
+
+    <div class="btn-container">
+      <button class="btn music-control" onclick="toggleMusic()">
+        <i class="fas fa-music neon-icon" style="color: var(--neon-green);"></i>
+        <span class="music-text">Play Music</span>
+      </button>
+      <a id="whatsappShare" class="btn whatsapp-share" target="_blank">
+        <i class="fab fa-whatsapp neon-icon" style="color: var(--neon-yellow);"></i> Share on WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <audio id="bgMusic" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mp3">
+    Your browser does not support the audio tag.
+  </audio>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

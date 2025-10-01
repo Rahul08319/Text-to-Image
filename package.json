@@ -1,0 +1,14 @@
+{
+  "name": "gemini-anniversary-app",
+  "version": "1.0.0",
+  "description": "A web app that generates images from text using Gemini AI for an anniversary.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "@google/genai": "^0.7.0",
+    "dotenv": "^16.4.5"
+  }
+}
