@@ -1,63 +1,330 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Anniversary 🎉</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="css/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Text-to-Image & Anniversary Studio — Apple Design</title>
+  <meta name="description" content="Generate breathtaking AI images and celebrate cherished love milestones with Cupertino-inspired Liquid Glass design and realistic animations." />
+  <meta name="theme-color" content="#f5f5f7" />
+
+  <!-- Apple & Open Graph Meta -->
+  <meta property="og:title" content="Text-to-Image & Anniversary Studio" />
+  <meta property="og:description" content="Generate breathtaking AI images with Apple Liquid Glass aesthetics." />
+  <meta property="og:type" content="website" />
+
+  <!-- Font Awesome & System Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <video autoplay muted loop id="bgVideo">
-    <source src="https://www.videvo.net/videvo_files/converted/2017_01/preview/170104_Fireworks_07_1080p.mp465611.webm" type="video/webm">
-    Your browser does not support HTML5 video.
-  </video>
-  <div class="overlay"></div>
-
-  <canvas id="fireworks"></canvas>
-
-  <div class="content">
-    <!-- Input area -->
-    <div class="input-container">
-      <input id="nameInput" placeholder="🎉 Couple's Names (e.g., Amit & Neha)" />
-      <input id="msgInput" placeholder="✍️ Personal Message (e.g., Wishing you...)" />
-      <button class="btn update-btn" onclick="updateContent()">
-        <i class="fas fa-sync-alt neon-icon" style="color: var(--neon-purple);"></i> Update Message
-      </button>
-    </div>
-
-    <!-- Display area -->
-    <h1 id="nameDisplay">Amit & Neha's Anniversary! <i class="fas fa-heart" style="color: var(--neon-pink);"></i></h1>
-    <p id="msgDisplay">Wishing you a lifetime of love and laughter together! <i class="fas fa-glass-cheers" style="color: var(--neon-yellow);"></i></p>
-
-    <!-- New text-to-image elements -->
-    <div class="image-generation-container">
-        <input id="imagePrompt" placeholder="🖼️ Describe an image to generate... (e.g., a couple on a beach)" />
-        <button class="btn generate-btn" onclick="generateImage()">
-            <i class="fas fa-magic neon-icon" style="color: var(--neon-blue);"></i> Generate Image
-        </button>
-        <div class="image-display-container">
-            <img id="generatedImage" src="" alt="Generated Image" style="display: none; max-width: 100%; border-radius: 10px; margin-top: 20px; box-shadow: 0 0 20px var(--neon-pink);">
-            <p id="loadingIndicator" style="display: none;">Generating your masterpiece... ✨</p>
-        </div>
-    </div>
-
-    <div class="btn-container">
-      <button class="btn music-control" onclick="toggleMusic()">
-        <i class="fas fa-music neon-icon" style="color: var(--neon-green);"></i>
-        <span class="music-text">Play Music</span>
-      </button>
-      <a id="whatsappShare" class="btn whatsapp-share" target="_blank">
-        <i class="fab fa-whatsapp neon-icon" style="color: var(--neon-yellow);"></i> Share on WhatsApp
-      </a>
-    </div>
+  <!-- Ambient Atmospheric Mesh Orbs -->
+  <div class="ambient-mesh">
+    <div class="mesh-blob blob-1"></div>
+    <div class="mesh-blob blob-2"></div>
+    <div class="mesh-blob blob-3"></div>
   </div>
 
-  <audio id="bgMusic" loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mp3">
-    Your browser does not support the audio tag.
-  </audio>
+  <!-- Background Video & Realistic Physics Fireworks Canvas -->
+  <video autoplay muted loop playsinline id="bgVideo">
+    <source src="https://www.videvo.net/videvo_files/converted/2017_01/preview/170104_Fireworks_07_1080p.mp465611.webm" type="video/webm">
+  </video>
+  <canvas id="fireworks"></canvas>
+  <div id="heartsContainer"></div>
 
-  <script src="js/script.js"></script>
+  <!-- Apple Liquid Glass Navigation -->
+  <nav class="apple-nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-brand">
+        <i class="fa-brands fa-apple apple-logo-icon"></i>
+        <span class="brand-text">Text-to-Image</span>
+        <span class="brand-badge">Studio <span class="auto-current-year">2026</span></span>
+      </a>
+
+      <div class="nav-actions">
+        <!-- Live Automated Year Status Indicator -->
+        <div class="auto-update-badge" title="Automatically synced for current and coming years">
+          <span class="auto-update-pulse"></span>
+          <span>Live <span class="auto-current-year">2026</span></span>
+        </div>
+
+        <!-- Ambient Music Toggle -->
+        <button class="icon-btn" id="musicControlBtn" onclick="toggleAudioPlayback()" title="Toggle Celebration Music">
+          <i class="fas fa-music" id="musicStatusIcon"></i>
+        </button>
+
+        <!-- Dark / Light Theme Toggle -->
+        <button class="icon-btn" id="themeToggleBtn" title="Toggle Cupertino Dark / Light Mode">
+          <i class="fas fa-moon" id="themeToggleIcon"></i>
+        </button>
+
+        <!-- GitHub Repository Link -->
+        <a href="https://github.com/Rahul08319/Text-to-Image" target="_blank" class="icon-btn" title="View Source on GitHub">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <main class="page-container">
+    <!-- Hero Section -->
+    <header class="hero-section">
+      <div class="hero-pill">
+        <i class="fas fa-sparkles"></i>
+        <span>Generative AI Engine • Apple Liquid Glass Edition</span>
+      </div>
+      <h1 class="hero-title">
+        Transform Words into <span class="accent-gradient">Visual Poetry.</span>
+      </h1>
+      <p class="hero-subtitle">
+        Create hyper-realistic AI imagery and design celebration keepsakes with refined Cupertino typography and physics-driven particle animations.
+      </p>
+    </header>
+
+    <!-- Studio Layout -->
+    <div class="studio-layout">
+      <!-- Studio Card -->
+      <section class="liquid-card">
+        <!-- Card Header -->
+        <div class="card-header">
+          <div class="card-title-group">
+            <div class="card-icon">
+              <i class="fas fa-wand-magic-sparkles"></i>
+            </div>
+            <div>
+              <h2 class="card-title">Generative Studio</h2>
+              <p class="card-desc">Type your dream visual or customize celebration moments</p>
+            </div>
+          </div>
+          <span class="brand-badge">Gemini & Flux Engine</span>
+        </div>
+
+        <!-- Segmented Controller -->
+        <div class="segmented-control" role="tablist">
+          <button class="segment-btn active" id="tabAiBtn" onclick="switchStudioTab('ai')">
+            <i class="fas fa-image"></i> AI Image Studio
+          </button>
+          <button class="segment-btn" id="tabCelebrationBtn" onclick="switchStudioTab('celebration')">
+            <i class="fas fa-heart"></i> Celebration & Milestones
+          </button>
+        </div>
+
+        <!-- TAB 1: AI Image Generator -->
+        <div id="aiStudioTab">
+          <div class="input-group">
+            <label class="input-label" for="imagePrompt">Describe Your Scene</label>
+            <div class="apple-input-wrapper">
+              <i class="fas fa-paintbrush"></i>
+              <input 
+                id="imagePrompt" 
+                class="apple-input" 
+                placeholder="e.g., A romantic candlelit terrace overlooking the Amalfi coast at sunset, cinematic lighting, ultra-realistic..." 
+                autocomplete="off"
+              />
+            </div>
+          </div>
+
+          <!-- Quick Inspiration Presets -->
+          <div class="input-group">
+            <label class="input-label">Quick Inspiration</label>
+            <div class="presets-grid">
+              <span class="preset-pill" onclick="setQuickPrompt('Romantic couple watching fireworks on a starlit beach in Maldives')">
+                🎆 Beach Fireworks
+              </span>
+              <span class="preset-pill" onclick="setQuickPrompt('Cinematic golden hour portrait of two lovers surrounded by glowing cherry blossoms')">
+                🌸 Cherry Blossom
+              </span>
+              <span class="preset-pill" onclick="setQuickPrompt('Futuristic cyberpunk cafe in neo-Tokyo with rain reflections and neon light')">
+                🌃 Cyberpunk Cafe
+              </span>
+              <span class="preset-pill" onclick="setQuickPrompt('Enchanted fairytale forest with bioluminescent waterfalls and crystal butterflies')">
+                ✨ Enchanted Forest
+              </span>
+            </div>
+          </div>
+
+          <!-- Artistic Style Presets -->
+          <div class="input-group">
+            <label class="input-label">Artistic Style</label>
+            <div class="presets-grid">
+              <span class="preset-pill active" onclick="setPresetStyle('Photorealistic', 'photorealistic 8k octane render hyper-detailed photography', this)">
+                📷 Photorealistic
+              </span>
+              <span class="preset-pill" onclick="setPresetStyle('Cupertino Minimal', 'apple minimal aesthetic, clean studio lighting, soft shadows, pristine depth', this)">
+                🍏 Cupertino Studio
+              </span>
+              <span class="preset-pill" onclick="setPresetStyle('Cinematic', '35mm anamorphic film, cinematic color grading, dramatic lighting', this)">
+                🎬 Cinematic
+              </span>
+              <span class="preset-pill" onclick="setPresetStyle('Anime Dream', 'Makoto Shinkai anime style, vibrant skies, radiant glowing clouds', this)">
+                🌌 Anime Dream
+              </span>
+              <span class="preset-pill" onclick="setPresetStyle('Watercolor', 'ethereal soft watercolor painting, organic texture, pastel elegance', this)">
+                🎨 Watercolor
+              </span>
+            </div>
+          </div>
+
+          <!-- Aspect Ratio Options -->
+          <div class="input-group">
+            <label class="input-label">Aspect Ratio</label>
+            <div class="ratio-selector">
+              <div class="ratio-option active" onclick="setAspectRatio('1:1', this)">
+                <i class="fas fa-square"></i> 1:1 Square
+              </div>
+              <div class="ratio-option" onclick="setAspectRatio('16:9', this)">
+                <i class="fas fa-tv"></i> 16:9 Landscape
+              </div>
+              <div class="ratio-option" onclick="setAspectRatio('9:16', this)">
+                <i class="fas fa-mobile-screen"></i> 9:16 Portrait
+              </div>
+              <div class="ratio-option" onclick="setAspectRatio('4:3', this)">
+                <i class="fas fa-rectangle-wide"></i> 4:3 Classic
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="btn-row">
+            <button class="apple-btn btn-primary" id="generateBtn" onclick="generateImage()">
+              <i class="fas fa-wand-magic-sparkles"></i> Generate Masterpiece
+            </button>
+            <button class="apple-btn btn-secondary" onclick="document.getElementById('imagePrompt').value = ''; document.getElementById('imagePrompt').focus();">
+              <i class="fas fa-eraser"></i> Clear Prompt
+            </button>
+          </div>
+        </div>
+
+        <!-- TAB 2: Celebration & Anniversary Card Maker -->
+        <div id="celebrationStudioTab" style="display: none;">
+          <div class="input-group">
+            <label class="input-label" for="nameInput">Couple's or Honoree's Names</label>
+            <div class="apple-input-wrapper">
+              <i class="fas fa-user-group"></i>
+              <input id="nameInput" class="apple-input" value="Amit & Neha" placeholder="e.g., Amit & Neha" />
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label class="input-label" for="anniversaryYearInput">Beginning Year (Auto-Calculates Milestones in <span class="auto-current-year">2026</span> & Future Years)</label>
+            <div class="apple-input-wrapper">
+              <i class="fas fa-calendar-check"></i>
+              <input id="anniversaryYearInput" type="number" class="apple-input" value="2020" min="1950" max="2099" oninput="updateCelebrationCard()" />
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label class="input-label" for="msgInput">Personalized Celebration Message</label>
+            <div class="apple-input-wrapper">
+              <i class="fas fa-quote-left"></i>
+              <input id="msgInput" class="apple-input" value="Wishing you a lifetime of timeless love, endless laughter, and boundless joy!" placeholder="Your custom message..." />
+            </div>
+          </div>
+
+          <!-- Live Dynamic Preview Banner -->
+          <div class="celebration-banner">
+            <div class="banner-names" id="nameDisplay">Amit & Neha's Celebration</div>
+            <div class="banner-msg" id="msgDisplay">Wishing you a lifetime of timeless love, endless laughter, and boundless joy!</div>
+            <div class="banner-milestone" id="milestoneTag">💖 Celebrating Anniversary</div>
+          </div>
+
+          <!-- Buttons -->
+          <div class="btn-row">
+            <button class="apple-btn btn-romantic" onclick="updateCelebrationCard()">
+              <i class="fas fa-check"></i> Update Card Details
+            </button>
+            <a id="whatsappShare" class="apple-btn btn-secondary" target="_blank" rel="noopener noreferrer">
+              <i class="fa-brands fa-whatsapp" style="color: var(--apple-green);"></i> Share on WhatsApp
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Real Apple Display Showcase Frame -->
+      <section class="display-stage">
+        <div class="device-frame">
+          <div class="display-viewport" id="displayViewport">
+            <!-- Initial Empty Placeholder -->
+            <div class="viewport-placeholder" id="viewportPlaceholder">
+              <i class="fas fa-camera-retro placeholder-icon"></i>
+              <div class="placeholder-text">
+                Your generated artwork will materialize here in ultra-high resolution.
+              </div>
+              <button class="apple-btn btn-secondary" style="font-size: 0.85rem; padding: 0.5rem 1.1rem;" onclick="setQuickPrompt('A dreamlike anniversary celebration under starry aurora borealis'); generateImage();">
+                <i class="fas fa-dice"></i> Surprise Me
+              </button>
+            </div>
+
+            <!-- Loading Spinner State -->
+            <div class="loading-box" id="loadingIndicator">
+              <div class="apple-spinner"></div>
+              <div class="loading-text">Rendering pixels with neural diffusion... ✨</div>
+            </div>
+
+            <!-- Generated Image Display -->
+            <img id="generatedImage" class="generated-img" alt="AI Generated Artwork" />
+
+            <!-- Floating Image Action Toolbar -->
+            <div class="canvas-actions" id="canvasActions">
+              <button class="canvas-btn" onclick="downloadCurrentImage()" title="Download High-Resolution PNG">
+                <i class="fas fa-download"></i> Download
+              </button>
+              <button class="canvas-btn" onclick="copyImageLink()" title="Copy Image URL">
+                <i class="fas fa-link"></i> Copy Link
+              </button>
+              <button class="canvas-btn" onclick="window.open(document.getElementById('generatedImage').src, '_blank')" title="Open Fullscreen">
+                <i class="fas fa-expand"></i> Fullscreen
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Audio Element -->
+    <audio id="bgMusic" loop preload="none">
+      <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mp3">
+      Your browser does not support audio playback.
+    </audio>
+
+    <!-- Apple-grade Footer with Automatic Coming-Years Logic -->
+    <footer class="apple-footer">
+      <div class="footer-meta">
+        <span>© <span class="auto-current-year">2026</span> Rahul08319 • Text-to-Image AI Studio</span>
+        <span>•</span>
+        <a href="https://github.com/Rahul08319/Text-to-Image" target="_blank" class="footer-link">GitHub Repository</a>
+        <span>•</span>
+        <span class="auto-update-badge">
+          <span class="auto-update-pulse"></span>
+          <span>Automatic Year Sync: Always Up-to-Date (<span class="auto-current-year">2026</span>+)</span>
+        </span>
+      </div>
+      <div>Designed with Apple Human Interface Guidelines • Clarity, Deference, and Depth</div>
+    </footer>
+  </main>
+
+  <!-- Script Includes -->
+  <script src="script.js"></script>
+  <script>
+    // Tab Switcher Controller
+    function switchStudioTab(tab) {
+      const aiTab = document.getElementById('aiStudioTab');
+      const celebrationTab = document.getElementById('celebrationStudioTab');
+      const tabAiBtn = document.getElementById('tabAiBtn');
+      const tabCelebrationBtn = document.getElementById('tabCelebrationBtn');
+
+      if (tab === 'ai') {
+        aiTab.style.display = 'block';
+        celebrationTab.style.display = 'none';
+        tabAiBtn.classList.add('active');
+        tabCelebrationBtn.classList.remove('active');
+      } else {
+        aiTab.style.display = 'none';
+        celebrationTab.style.display = 'block';
+        tabAiBtn.classList.remove('active');
+        tabCelebrationBtn.classList.add('active');
+      }
+    }
+  </script>
 </body>
 </html>
