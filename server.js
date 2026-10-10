@@ -5,9 +5,23 @@ require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Middleware
+// Enable JSON Body Parsing & CORS
 app.use(express.json());
-app.use(express.static(path.join(__dirname))); // Serve root directory
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  next();
+});
+
+// Explicitly serve static assets
+app.use(express.static(path.join(__dirname)));
+app.use('/css', express.static(path.join(__dirname, 'css')));
+app.use('/js', express.static(path.join(__dirname, 'js')));
+app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 // Health & Status with Automatic Year Logic
 app.get('/api/health', (req, res) => {
@@ -22,7 +36,7 @@ app.get('/api/health', (req, res) => {
 
 // Endpoint to generate images
 app.post('/generate-image', async (req, res) => {
-  const { prompt, width = 1024, height = 1024 } = req.body;
+  const { prompt, width = 1024, height = 1024 } = req.body || {};
 
   if (!prompt || typeof prompt !== 'string') {
     return res.status(400).json({ error: 'A valid text prompt is required.' });
@@ -51,13 +65,30 @@ app.post('/generate-image', async (req, res) => {
   }
 });
 
+// Explicit Root Route — Guarantees index.html is served on Vercel & local
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// Catch-all route to serve index.html for any direct navigation
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// CLI Verification Test Mode
 if (process.argv.includes('--test')) {
   console.log('✓ Server test verification passed: routes and middleware valid.');
   process.exit(0);
 }
 
-app.listen(port, () => {
-  console.log(`\n Apple Design Text-to-Image Studio is running`);
-  console.log(`Local Access: http://localhost:${port}`);
-  console.log(`Year Engine: Active for ${new Date().getFullYear()} and future years\n`);
-});
+// Export for Vercel Serverless Function runtime
+module.exports = app;
+
+// Start server if run directly (local development)
+if (require.main === module || !process.env.VERCEL) {
+  app.listen(port, () => {
+    console.log(`\n Apple Design Text-to-Image Studio is running`);
+    console.log(`Local Access: http://localhost:${port}`);
+    console.log(`Year Engine: Active for ${new Date().getFullYear()} and future years\n`);
+  });
+}
