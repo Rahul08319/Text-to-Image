@@ -1,7 +1,8 @@
 <div align="center">
 
-#  Text-to-Image AI Studio
-### *Generative Neural Art & Celebration Keepsakes in Cupertino Elegance*
+<img src="assets/banner.svg" alt="Text-to-Image Apple AI Studio Banner" width="100%" />
+
+<br/><br/>
 
 [![Live Demo](https://img.shields.io/badge/Demo-Live_Preview-0071e3?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/Rahul08319/Text-to-Image)
 [![Design System](https://img.shields.io/badge/Design_System-Apple_Liquid_Glass-ff2d55?style=for-the-badge&logo=apple&logoColor=white)](https://developer.apple.com/design/)

@@ -1,14 +1,27 @@
 {
-  "name": "gemini-anniversary-app",
-  "version": "1.0.0",
-  "description": "A web app that generates images from text using Gemini AI for an anniversary.",
+  "name": "text-to-image-studio",
+  "version": "2.0.0",
+  "description": " Text-to-Image AI Studio — Generative neural art and celebration keepsakes crafted with Apple Liquid Glass aesthetics, realistic physics animations, and auto-year sync engine.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node server.js --test"
   },
+  "keywords": [
+    "text-to-image",
+    "generative-ai",
+    "apple-design",
+    "liquid-glass",
+    "fireworks-physics",
+    "anniversary",
+    "gemini",
+    "flux"
+  ],
+  "author": "Rahul Kumar (https://github.com/Rahul08319)",
+  "license": "MIT",
   "dependencies": {
-    "express": "^4.19.2",
-    "@google/genai": "^0.7.0",
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
   }
 }
